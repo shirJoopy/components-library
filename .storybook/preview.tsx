@@ -1,5 +1,22 @@
 import type { Preview } from "@storybook/react";
-import React from "react";
+import React, { useEffect } from "react";
+
+const loadScript = (src: string) => {
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = src;
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+}
+
+const loadCss = (href: string) => {
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = href;
+  document.head.appendChild(link);
+}
 
 const preview: Preview = {
   parameters: {
@@ -10,27 +27,24 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
-
   },
   decorators: [
     (Story) => {
+      useEffect(() => {
+        const loadScripts = async () => {
+         
+          //@ts-ignore
 
+          loadCss('https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css');
+         
+        };
 
-      setTimeout(() => {
-        
-        [2,3,4,5,6,7,8].forEach((index) => {
-          const pallete = document.querySelector(`#storybook-root > div > div:nth-child(${index})`)
-          pallete?.parentElement?.removeChild(pallete);
-        })
-      }, 0)
-      return <Story />
+        loadScripts();
+      }, []);
+
+      return <Story />;
     },
-  ]
+  ],
 };
-const link = document.createElement('link');
-link.rel = 'stylesheet';
-link.href = 'https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css';
-document.head.appendChild(link);
-
 
 export default preview;

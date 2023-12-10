@@ -1,9 +1,6 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-
 import { TileLayout, TileLayoutItem, TileLayoutProps, TilePosition, TileStrictPosition } from '@progress/kendo-react-layout';
 import styled from 'styled-components';
-import { object } from 'prop-types';
 import { useEffect } from 'react';
 
 
@@ -151,7 +148,7 @@ export default ({ items, columns }: LayoutProps) => {
     //     console.log(layoutManager.current.items)
     // },[layoutManager.current.items])
     return (
-        <TileLayout
+        <Style
             {...tileLayoutProps}
             onReposition={({value})=>{
                 layoutManager.current.reposition(value);
