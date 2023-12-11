@@ -1,1 +1,1 @@
-export {default} from './Feed.component';
+export {default} from './Feed.stories';
