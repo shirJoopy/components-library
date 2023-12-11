@@ -18,6 +18,7 @@ jobs:
 
       - name: Set Git identity
         run: |
+          git remote set-url origin https://github.com/shirJoopy/components-library.git
           git config --global user.email "shir.l@incentives-solutions.com"
           git config --global user.name "shirJoopy"
 
