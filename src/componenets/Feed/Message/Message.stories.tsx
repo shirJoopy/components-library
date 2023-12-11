@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import Message from './Message';
+import { MessgeIcons } from '../../Icons';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -69,6 +70,7 @@ export const Primary: Story = {
       title:'test',
       content:'another test',
       date:new Date(),
+      Icon:MessgeIcons.AlertSvg ,
       author:{
         userId:123,
         altText:'Jonnie',
