@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Card, Avatar} from '@progress/kendo-react-layout';
-import { Icon } from '@progress/kendo-react-common';
+import { Icon as KendoIcon} from '@progress/kendo-react-common';
 import { Avatar as AvatarIcon } from 'antd';
 
 interface Author {
@@ -14,9 +14,10 @@ interface MessageType {
     content: string;
     date: Date;
     author?: Author;
+    Icon:string
 }
 
-const Message: React.FC<MessageType> = ({ title, content, date, author }) => {
+const Message: React.FC<MessageType> = ({ title, content, date, author,Icon }) => {
     return (
         <Card style={{ width: '100%', marginBottom: '15px' }}>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
@@ -30,11 +31,11 @@ const Message: React.FC<MessageType> = ({ title, content, date, author }) => {
                 )}
                 <span style={{marginTop: 12, marginLeft: 10, marginRight: 10 ,flex:1,flexDirection:'column',display:'flex'}}>
                     <span>{title}</span>
-                    <p style={{padding:0,marginTop:4,marginBottom:4,flex:1}}>{content}<Icon size='large' name="home" style={{color:'red',fill:'blue'}}/></p>
+                    <p style={{padding:0,marginTop:4,marginBottom:4,flex:1}}>{content}<KendoIcon size='large' name="home" style={{color:'red',fill:'blue'}}/></p>
                     
                 </span>
                
-                <AvatarIcon src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=2" />
+                <img src={Icon} style={{width:20,height:20,margin:10}} />
 
             </div>
             <p style={{margin:12}}>Date: {date.toDateString()}</p>
