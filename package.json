@@ -24,8 +24,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "storybook:build": "storybook build -o docs",
-    "storybook:deploy": "npm run storybook:build && gh-pages -d docs",
+    "build-storybook": "storybook build -o docs",
+    "deploy-storybook": "npm run storybook:build && gh-pages -d docs",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
