@@ -25,7 +25,7 @@
   },
   "scripts": {
     "build-storybook": "storybook build -o docs",
-    "deploy-storybook": "npm run storybook:build && gh-pages -d docs",
+    "deploy-storybook": "npm run build-storybook && gh-pages -d docs",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
