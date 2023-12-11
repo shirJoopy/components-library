@@ -1,0 +1,29 @@
+name: Deploy Storybook
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install # Or yarn install
+
+      - name: Build Storybook
+        run: npm run build-storybook # Or the command to build Storybook
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GIT_ACCESS_TOKEN }}
+          publish_dir: ./docs # Update with your Storybook build directory
