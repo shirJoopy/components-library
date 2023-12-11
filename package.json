@@ -26,7 +26,7 @@
   "scripts": {
     "build-storybook": "storybook build",
     "predeploy": "npm run build-storybook",
-    "deploy-storybook": "npm run predeploy && gh-pages -d docs",
+    "deploy-storybook": "npm run predeploy && gh-pages -d storybook-static",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
