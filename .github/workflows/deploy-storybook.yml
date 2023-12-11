@@ -16,10 +16,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-        - name: Set Git identity
-        run: |
-          git config --global user.email "shir.l@incentives-solutions.com"
-          git config --global user.name "shirJoopy"
+      - name: Set Git identity
+      run: |
+        git config --global user.email "shir.l@incentives-solutions.com"
+        git config --global user.name "shirJoopy"
 
       - name: Install dependencies
         run: npm install # Or yarn install
