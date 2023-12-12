@@ -1,13 +1,16 @@
 import AutoSizer from "react-virtualized/dist/commonjs/AutoSizer";
 import List from "react-virtualized/dist/commonjs/List";
+import CellMeasurer, { CellMeasurerCache } from "react-virtualized/dist/commonjs/CellMeasurer"
 import "react-virtualized/styles.css";
 import styled from "styled-components";
 import "react-virtualized/styles.css";
 
-const data = Array.from({ length: 500 }, (_, index) => `Item ${index + 1}`);
+// const data = Array.from({ length: 500 }, (_, index) => `Item ${index + 1}`);
 
 const RowContainer = styled.div`
-  margin-bottom: 10px; /* Adjust this value based on your desired spacing */
+  margin-bottom: 10px; 
+  border : 2px solid ;
+  padding:10px;
 `;
 
 const Message = styled.div`
@@ -15,13 +18,12 @@ const Message = styled.div`
   word-wrap: break-word;
 `;
 
-const Tittle = styled.h1`
+const Title = styled.h1`
   font-size: 1em;
   color: #029cfd;
   margin-bottom: 0px;
+  margin-top: 0px;
 `;
-
-
 
 
 const staticData = [
@@ -77,38 +79,41 @@ const staticData = [
 ];
 
 const Feed: React.FC = () => {
+  
+  const cache = new CellMeasurerCache({
+    defaultHeight: 50, // Default height for rows
+    fixedWidth: true, // Assuming a fixed-width list, change to false if width is dynamic
+  });
 
-  const calculateRowHeight = ({ index }: any) => {
-    const content = staticData[index].message;
-    const lineHeight = 20; // Adjust this value based on your font size and line height
-    const lines = Math.ceil(content.length / 40); // Assuming an average of 40 characters per line
-    const contentHeight = lines * lineHeight + 20; // Additional padding
-    return contentHeight;
-  };
-
-  const rowRenderer = ({ index, key, style }: any) => (
-    <RowContainer key={key} style={{ ...style, height: calculateRowHeight({ index }) }}>
-      <Tittle>Hello welcome................</Tittle>
-      <Message >
-      {staticData[index].message}
-      {staticData[index].message}
-      </Message>
-    </RowContainer>
+  const rowRenderer = ({ index, key,parent, style }: any) => (
+    <CellMeasurer cache={cache} key={key} parent={parent} columnIndex={0} rowIndex={index}>
+      {({ measure }) => (
+        <div onLoad={measure} style={style}>
+          <RowContainer>
+            <Title>Hello welcome................</Title>
+            <Message>
+              {staticData[index].message}
+              {staticData[index].message}
+              {staticData[index].message}
+            </Message>
+          </RowContainer>
+        </div>
+      )}
+    </CellMeasurer>
   );
   return (
     <>
       <AutoSizer>
-        {({ width }) => (
-          <List
-            ref="List"
-            width={width}
-            height={500}
-            rowCount={staticData.length}
-            rowHeight={calculateRowHeight}
-            rowRenderer={rowRenderer}
-          />
-       
-        )}
+         {({ width,height}) => (
+        <List
+          ref="List" 
+          width={width}
+          height={500}
+          rowCount={staticData.length}
+          rowHeight={cache.rowHeight}
+          rowRenderer={rowRenderer}
+        />
+      )}
       </AutoSizer>
     </>
   );
