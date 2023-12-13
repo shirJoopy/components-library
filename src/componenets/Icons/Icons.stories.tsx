@@ -90,15 +90,6 @@ type Story = StoryObj<typeof meta>;
 export const MessgeIcons: Story = {
   args: {
     icons: { ...Icons.MessgeIcons }
-    // Your arguments for the HomeIcons component or icon set
-    // For example, if HomeIcons is a component that renders multiple icons,
-    // pass appropriate props here.
+  
   },
 };
-// Add more stories for other icons or components as needed
-
-// Example usage:
-// You'll fill in the args object with appropriate props to showcase each icon or component.
-// This structure allows you to define separate stories for different icons or components.
-
-// Ensure to import your components or icons and adjust the args accordingly.

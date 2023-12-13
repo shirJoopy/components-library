@@ -31,15 +31,7 @@ const preview: Preview = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        const loadScripts = async () => {
-         
-          //@ts-ignore
-
           loadCss('https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css');
-         
-        };
-
-        loadScripts();
       }, []);
 
       return <Story />;
