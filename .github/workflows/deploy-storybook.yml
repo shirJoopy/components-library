@@ -16,6 +16,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set Git identity
+        run: |
+          git config user.email "shir.l@incentives-solutions.com"
+          git config user.name "shirJoopy"
+
       - name: Install dependencies
         run: npm install # Or yarn install
 
@@ -25,5 +30,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GIT_ACCESS_TOKEN }} # Use your custom access token here
+          github_token: ${{ secrets.GIT_ACCESS_TOKEN }}
           publish_dir: ./docs # Update with your Storybook build directory
