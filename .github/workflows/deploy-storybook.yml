@@ -23,6 +23,7 @@ jobs:
         run: |
           git config user.email "shir.l@incentives-solutions.com"
           git config user.name "shirJoopy"
+          git remote set-url origin git@github.com:shirJoopy/components-library.git
 
       - name: Install dependencies
         run: npm install # Or yarn install
