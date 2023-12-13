@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Display Access Token
+        run: echo "The access token in ${{secrets.GIT_ACCESS_TOKEN}}"
+      
       - name: Checkout code
         uses: actions/checkout@v2
 
