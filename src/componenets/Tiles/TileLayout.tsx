@@ -1,17 +1,18 @@
+
 import * as React from 'react';
 import { TileLayout, TileLayoutItem, TileLayoutProps, TilePosition, TileStrictPosition } from '@progress/kendo-react-layout';
 import styled from 'styled-components';
 import { useEffect } from 'react';
 
-
-type LayoutProps = {
-    columns: number,
-
-    items: ExtendedTileLayoutItem[]
-}
+interface CustomWindow extends Window {
+    _userLanguage?: string;
+  }
+  declare let window: CustomWindow;
+  
+  
 
 const Style = styled(TileLayout)`
-
+    direction: ${()=>window._userLanguage === 'Hebrew' ? 'rtl' : 'ltr'};
     .empty > .k-tilelayout-item-header.k-card-header {
         border: none;
     }
@@ -19,7 +20,7 @@ const Style = styled(TileLayout)`
 `
 
 export type ExtendedTileLayoutItem = Omit<TileLayoutItem, 'defaultPosition'> & {
-    stick: 'right' | 'top' | 'left' | 'bottom' | 'horizontal' | 'vertical' | 'none';
+    stick?: 'right' | 'top' | 'left' | 'bottom' | 'horizontal' | 'vertical' | 'none';
     defaultPosition: ExtendedTileLayoutItem['stick'] extends 'none'
     ? never
     : TilePosition;
@@ -61,7 +62,7 @@ class ObservableValue<T> {
     }
 }
 
-class LayoutManager {
+class LayoutManager<T> {
 
     items: ObservableValue<TileLayoutItem>[] = [];
 
@@ -78,14 +79,14 @@ class LayoutManager {
        
     }
 
-    addItem(item: ExtendedTileLayoutItem) {
+    addItem(item: T) {
         const newItem = new ObservableValue<TileLayoutItem>(item);
         newItem.addListener((newValue)=>{
             console.log('item',item,'newValue',newValue)
         })
         this.items.push(newItem);
     }
-    parseItem(item: ExtendedTileLayoutItem, props: TileLayoutProps){
+    parseItem(item: T, props: TileLayoutProps){
         
         return {} as TileLayoutItem
     } 
@@ -103,59 +104,43 @@ class LayoutManager {
     }
 }
 
-
-const parseItem:
-    (item: ExtendedTileLayoutItem, props: TileLayoutProps) =>
-        TileLayoutItem = ({ stick, ...item }) => {
-            switch (stick) {
-                case 'left':
-                    return { ...item, defaultPosition: { col: 1, rowSpan: 3 } }
-
-                default:
-                    return item;
-            };
-        }
-export default ({ items, columns }: LayoutProps) => {
+export default (props: TileLayoutProps) => {
 
     const ref = React.useRef<TileLayout | null>(null);
 
-    const tileLayoutProps = {
-        columns,
-        rowHeight: 200,
-        gap: { rows: 1, columns: 1 },
-
-    }
-
-    const layoutManager = React.useRef(new LayoutManager(tileLayoutProps, ref))
+    
     // useEffect(() => {
     //     console.log(ref.current);
     //     console.log(layoutManager.current);
     // }, [layoutManager.current, ref]);
 
-    useEffect(() => {
-        items.forEach(item => {
+
+  
+    
+
+   
+
+     
+     const layoutManager = React.useRef(new LayoutManager(props, ref))
+
+     useEffect(() => {
+        props.items && props.items.forEach(item => {
             layoutManager.current.addItem(item)
         })
-    }, [layoutManager, items])
-    const tiles = React.useMemo(() => {
-        if (items.length) {
-            return items.map((item) => parseItem(item, tileLayoutProps))
-        }
-        return [];
-    }, [items])
-
+    }, [layoutManager, props.items])
     // useEffect(()=>{
     //     console.log(layoutManager.current.items)
     // },[layoutManager.current.items])
     return (
         <Style
-            {...tileLayoutProps}
+            {...props}
             onReposition={({value})=>{
                 layoutManager.current.reposition(value);
                 // console.log(value)
             }}
-            items={tiles}
+            
         />
     );
 };
+
 

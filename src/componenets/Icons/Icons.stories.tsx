@@ -75,7 +75,7 @@ const IconsList = ({ icons }: { icons: TT }) => {
 
 
 const meta: Meta = {
-  title: 'Example/Icons', // Update the title as needed
+  title: 'Components/Icons', // Update the title as needed
   // Add parameters or layout settings if required
   component: IconsList,
 

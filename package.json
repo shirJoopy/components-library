@@ -1,12 +1,10 @@
 {
   "name": "joopy-library",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.1.4",
   "homepage": "http://shirJoopy.github.io/components-library",
+  "main": "src/index.ts", 
   "dependencies": {
-    "@progress/kendo-licensing": "^1.3.3",
-    "@progress/kendo-react-all": "^6.1.1",
-    "@progress/kendo-react-layout": "^6.1.1",
+   
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

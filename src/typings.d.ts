@@ -1,4 +1,9 @@
 // typings.d.ts
+interface CustomWindow extends Window {
+  _userLanguage?: string;
+}
+declare let window: CustomWindow;
+
 
 declare module '*.svg' {
     const content: string;
