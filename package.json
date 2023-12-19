@@ -4,6 +4,8 @@
   "homepage": "http://shirJoopy.github.io/components-library",
   "main": "src/index.ts",
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@progress/kendo-react-buttons": "^7.0.2",
     "@progress/kendo-react-common": "^7.0.2",
     "@progress/kendo-react-layout": "^7.0.2",
     "@testing-library/jest-dom": "^5.17.0",
