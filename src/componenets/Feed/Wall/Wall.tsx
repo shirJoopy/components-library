@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import Message, { DBMessageType, MessageType } from "../Message/Message"
+import { FC } from "react"
 
 
 const StyledWall = styled.div`
@@ -17,7 +18,9 @@ type WallProps = {
     messages:MessageType[]
 }
 
-export default ({messages}:WallProps)=>{
 
+const Wall :FC<WallProps>= ({messages})=>{
     return <StyledWall>{messages.map((message,index)=><Message {...message} index={index} />)}</StyledWall>
 }
+
+export default Wall;
