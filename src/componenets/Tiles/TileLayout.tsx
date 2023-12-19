@@ -104,21 +104,10 @@ class LayoutManager<T> {
     }
 }
 
-export default (props: TileLayoutProps) => {
+const JoopyTileLayout :React.FC<TileLayoutProps> = (props) => {
 
     const ref = React.useRef<TileLayout | null>(null);
 
-    
-    // useEffect(() => {
-    //     console.log(ref.current);
-    //     console.log(layoutManager.current);
-    // }, [layoutManager.current, ref]);
-
-
-  
-    
-
-   
 
      
      const layoutManager = React.useRef(new LayoutManager(props, ref))
@@ -128,19 +117,19 @@ export default (props: TileLayoutProps) => {
             layoutManager.current.addItem(item)
         })
     }, [layoutManager, props.items])
-    // useEffect(()=>{
-    //     console.log(layoutManager.current.items)
-    // },[layoutManager.current.items])
+   
+    
     return (
         <Style
             {...props}
             onReposition={({value})=>{
                 layoutManager.current.reposition(value);
-                // console.log(value)
             }}
             
         />
     );
 };
+
+export default JoopyTileLayout;
 
 
