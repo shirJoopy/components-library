@@ -1,59 +1,46 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-// import { ICON_SIZES_CLASSES } from '../../Enums/CommonEnums';
+import SelectStar from '../componenets/Icons/sources/selectedstar.svg';
+import Star from '../componenets/Icons/sources/star.svg';
 
-import styles from './FavoriteIcon';
-import  TenantSvg  from '../componenets/Icons/sources/tenat.svg';
-// import { labels } from '../../labels';
-
+interface FavoriteIconsProps {
+  size?: 'large' | 'medium' | 'small';
+  color?: string;
+  tooltip?: string;
+  isContour?: boolean;
+  onClick?: () => void;
+}
 
 const ICON_SIZES_CLASSES = {
-    LARGE: 'large',
-    MEDIUM: 'medium',
-    SMALL: 'small'
+  LARGE: 'large',
+  MEDIUM: 'medium',
+  SMALL: 'small'
 };
 
-//this components renders Favorite(Star) icon 
-const FavoriteIcons = (props :any) => {
-    const { size, color, tooltip, isContour } = props;
-    const styleSizeClass = (typeof(size) != 'undefined' ? size : ICON_SIZES_CLASSES.MEDIUM);
-    const colorStyle = (typeof(color) != 'undefined' && color != null && color.hasOwnProperty('length') && color.length > 0) ? 
-        {color: color} : {color: '#4c5865'};
-    const title = (typeof(tooltip) != 'undefined' && tooltip.length > 0) ? tooltip : "labels.Common.iconsDefTooltips.favourite";
-    const iconType = (typeof(isContour) != 'undefined' && isContour === false) ? 1 : 2;//1 -> painted, 2 -> contour
+const FavoriteIcons: React.FC<FavoriteIconsProps> = (props) => {
+  const { size, color, tooltip, onClick } = props;
+  const styleSizeClass = size || ICON_SIZES_CLASSES.MEDIUM;
+  const colorStyle = color ? { color: color } : { color: '#4c5865' };
+  const title = tooltip || "labels.Common.iconsDefTooltips.favourite";
+  const iconType = color === "#ffcc00" ? 1 : 2;
 
-    return (
-        <i className={" fa-stack"}
-           style={colorStyle}
-           title={title}
-           onClick={() => (props.hasOwnProperty('onClick') && typeof(props.onClick) != 'undefined' ? props.onClick() : null)}>
-            {iconType == 1 &&
-                // <i className={ " fas fa-star"}></i>
-                <img src={TenantSvg} style={{ width: 20, height: 20 }} />
-            }
-            {iconType == 2 &&
-                <i className={ " far fa-star"}></i>
-            }
-        </i>
-    );
+  return (
+    <>
+      <i style={colorStyle} title={title} onClick={onClick}>
+        {iconType === 1 && <img src={Star} style={{ width: 20, height: 20 }} alt="Star" />}
+        {iconType === 2 && <img src={SelectStar} style={{ width: 20, height: 20 }} alt="Selected Star" />}
+      </i>
+    </>
+  );
 };
-
-
-
 
 FavoriteIcons.propTypes = {
-    /** an optional parameter that determines size of icon, by default icon will be of medium size */
-    size: PropTypes.oneOf([ICON_SIZES_CLASSES.LARGE, ICON_SIZES_CLASSES.MEDIUM, ICON_SIZES_CLASSES.SMALL]),
-    /** an optional parameter that determines wich type of icon to render: false -> painted or true -> contour. By default: displayed contour variant */
-    isContour: PropTypes.bool,
-    /** an optional parameter, that defines the color of icon */  
-    color: PropTypes.string,
-    /** an optional parameter, that determines custom tooltip, if not send - default tooltip is used */
-    tooltip: PropTypes.string,
-    /** an optional function to handle click on icon */
-    onClick: PropTypes.func
+//   size: PropTypes.oneOf([ICON_SIZES_CLASSES.LARGE, ICON_SIZES_CLASSES.MEDIUM, ICON_SIZES_CLASSES.SMALL]),
+  isContour: PropTypes.bool,
+  color: PropTypes.string,
+  tooltip: PropTypes.string,
+  onClick: PropTypes.func
 };
-
 
 export default FavoriteIcons;
