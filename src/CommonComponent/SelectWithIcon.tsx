@@ -16,8 +16,9 @@ interface SelectWithIconProps {
   selectedValue?: string;
 }
 
-export const SelectWithIcon = forwardRef(
-  ({ placeholder, options, selectedValue }: SelectWithIconProps, ref: Ref<HTMLSelectElement>) => {
+// export const SelectWithIcon = forwardRef(
+//   ({ placeholder, options, selectedValue }: SelectWithIconProps, ref: Ref<HTMLSelectElement>) => {
+export const SelectWithIcon = forwardRef(({ placeholder, options, selectedValue }:any, ref : any) => {
     const id = "1";
 
     return (

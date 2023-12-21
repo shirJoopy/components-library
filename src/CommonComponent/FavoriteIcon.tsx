@@ -21,15 +21,15 @@ const ICON_SIZES_CLASSES = {
 const FavoriteIcons: React.FC<FavoriteIconsProps> = (props) => {
   const { size, color, tooltip, onClick } = props;
   const styleSizeClass = size || ICON_SIZES_CLASSES.MEDIUM;
-  const colorStyle = color ? { color: color } : { color: '#4c5865' };
+  const colorStyle = color ? { color: color } : { color: '#4c5865' ,cursor:"pointer"};
   const title = tooltip || "labels.Common.iconsDefTooltips.favourite";
   const iconType = color === "#ffcc00" ? 1 : 2;
 
   return (
     <>
       <i style={colorStyle} title={title} onClick={onClick}>
-        {iconType === 1 && <img src={Star} style={{ width: 20, height: 20 }} alt="Star" />}
-        {iconType === 2 && <img src={SelectStar} style={{ width: 20, height: 20 }} alt="Selected Star" />}
+        {iconType === 1 && <img src={Star} style={{ width: 20, height: 20,cursor:"pointer"  }} alt="Star" />}
+        {iconType === 2 && <img src={SelectStar} style={{ width: 20, height: 20, cursor:"pointer" }} alt="Selected Star" />}
       </i>
     </>
   );
