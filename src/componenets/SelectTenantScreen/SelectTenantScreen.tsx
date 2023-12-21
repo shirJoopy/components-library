@@ -106,7 +106,7 @@ export const SelectTenantScreen: React.FC = () => {
 
   return (
     <Wrapper>
-      <div className="row justify-content-center fs20">Select Tenant Login</div>
+      {/* <div className="row justify-content-center fs20">Select Tenant Login</div> */}
       <Form action="#" className="signin-form" onSubmit={(e) => e.preventDefault()}>
         <SelectWithIconWrapper>
           <SelectWithIcon {...withIconControlProps} options={options} ref={tenantRef} />
