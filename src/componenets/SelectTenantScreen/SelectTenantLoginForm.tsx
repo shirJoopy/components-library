@@ -6,18 +6,6 @@ import useCommonHook from '../../CommonComponent/CommonHook';
 import Header from './Header'; // Import Header component
 import Footer from './Footer'; // Import Footer component
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 20px;
-  width: 100%;
-  min-width: 1000px;
-  min-height: 100%;
-  height: auto!important;
-  height: 100%;
-  background: #efefef;
-`;
 
 const Form = styled.form`
   display: flex;
@@ -58,19 +46,10 @@ const FavoriteButton = styled.button`
   border: 1px solid #eaeaea;
 `;
 
-const JoopyLPContent = styled.div`
-    min-height: 600px;
-    padding: 0 0 5px;
-    // min-height: 510px;
-    position: relative;
-`;
-const JoopyLP = styled.div`
-  padding: 96px 80px;
-  font-family: "Segoe UI","Segoe UI Web Regular","Segoe UI Symbol","Helvetica Neue","BBAlpha Sans","S60 Sans",Arial,sans-serif;
-`;
+
 
 const JoopyLPHeader = styled.div`
-  font-size: 38px;
+  font-size: 24px;
   font-weight: 300;
   line-height: 50px;
   color: #9f3c96;
@@ -78,37 +57,7 @@ const JoopyLPHeader = styled.div`
   text-align: center;
 `;
 
-const JoopyLPForm = styled.div`
-  position: relative;
-  background-color: #fff;
-  width: 360px;
-  margin: 0 auto;
-  padding: 36px 72px 36px;
-  border-radius: 64px;
-  box-shadow: 0 1px 2px 1px rgba(0,0,0,.15), 0 2px 8px 0 rgba(0,0,0,.1);
-  &::before {
-    content: '';
-    z-index: 1;
-    position: absolute;
-    right: 72px;
-    bottom: -76px;
-    display: inline-block;
-    border-top: 76px solid rgba(0,0,0,.2);
-    border-left: 64px solid transparent;
-    border-right: 0 solid transparent;
-  }
-  &::after {
-    content: '';
-    z-index: 1;
-    position: absolute;
-    right: 74px;
-    bottom: -72px;
-    display: inline-block;
-    border-top: 72px solid #fff;
-    border-left: 60px solid transparent;
-    border-right: 0 solid transparent;
-  }
-`;
+
 
 const SelectTenantLoginForm: React.FC = () => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -138,7 +87,7 @@ const SelectTenantLoginForm: React.FC = () => {
     <>
       {/* <Header /> */}
      
-            <JoopyLPHeader className="row justify-content-center fs20">Select Tenant Login</JoopyLPHeader>
+           
             <Form action="#" className="signin-form" onSubmit={(e) => e.preventDefault()}>
               <SelectWithIconWrapper>
                 <SelectWithIcon {...withIconControlProps} options={options} ref={tenantRef} />
