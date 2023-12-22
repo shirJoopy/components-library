@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Window } from '@progress/kendo-react-dialogs';
-import { SelectTenantScreen } from '../SelectTenantScreen/SelectTenantScreen';
+import  SelectTenantLoginForm  from '../SelectTenantScreen/SelectTenantLoginForm';
 import  LoginFormHeader  from './LoginFormHeader';
 import LoginFormFoorter from './LoginFormFooter';
 import incentivesLogo from "../../stories/assets/incentivesLogo.png"
@@ -24,7 +24,7 @@ const SelectTenantLoginWin = () => {
         {visible &&
         <Window title={"Select Tenant Login"} onClose={toggleDialog} initialHeight={350}>
             <LoginFormHeader partnerLogo={partnerLogo}/>
-         <SelectTenantScreen/>
+         <SelectTenantLoginForm/>
          <LoginFormFoorter/>
         </Window>}
       </div>
