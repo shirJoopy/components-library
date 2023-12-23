@@ -8,17 +8,19 @@ import "./SelectWithIcon.css";
 interface Option {
   value: string;
   label: string;
+  fav: string;
 }
 
 interface SelectWithIconProps {
   placeholder: string;
   options: Option[];
   selectedValue?: string;
+  setSelectedValue?: (value: string) => void; 
 }
 
 // export const SelectWithIcon = forwardRef(
 //   ({ placeholder, options, selectedValue }: SelectWithIconProps, ref: Ref<HTMLSelectElement>) => {
-export const SelectWithIcon = forwardRef(({ placeholder, options, selectedValue }:any, ref : any) => {
+export const SelectWithIcon = forwardRef(({ placeholder, options, selectedValue ,setSelectedValue,handleChange}:any, ref : any) => {
     const id = "1";
 
     return (
@@ -30,7 +32,7 @@ export const SelectWithIcon = forwardRef(({ placeholder, options, selectedValue 
           <TenantSvg style={{ height: "20px", width: "20px" }} />
         </label>
         <div className="select">
-          <select id={id} name={id} autoFocus={true} defaultValue={""} ref={ref}>
+          <select id={id} name={id} autoFocus={true} defaultValue={selectedValue} ref={ref} onChange={handleChange}>
             <option disabled hidden>
               {placeholder}
             </option>

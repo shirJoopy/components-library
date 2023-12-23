@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import { SelectWithIcon } from '../../CommonComponent/SelectWithIcon';
 import FavoriteIcons from '../../CommonComponent/FavoriteIcon';
@@ -12,12 +12,10 @@ const Form = styled.form`
   flex-direction: column;
   align-items: center;
 `;
-
 const ButtonWrapper = styled.div`
   display: flex;
   margin-top: 10px;
 `;
-
 const Button = styled.button`
   display: inline-block;
   font-weight: 400;
@@ -36,7 +34,6 @@ const Button = styled.button`
   color: #fff;
   fill: #9f3c96;
 `;
-
 const SelectWithIconWrapper = styled.div`
   display: flex;
 `;
@@ -46,26 +43,12 @@ const FavoriteButton = styled.button`
   border: 1px solid #eaeaea;
 `;
 
-
-
-const JoopyLPHeader = styled.div`
-  font-size: 24px;
-  font-weight: 300;
-  line-height: 50px;
-  color: #9f3c96;
-  margin: 0 0 24px;
-  text-align: center;
-`;
-
-
-
 const SelectTenantLoginForm: React.FC = () => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const [selectedValue, setSelectedValue] = useState(""); 
   const tenantRef = React.createRef<HTMLElement>();
 
-  const handleFavoriteClick = () => {
-    setIsFavorite((prevIsFavorite) => !prevIsFavorite);
-  };
+  
 
   const withIconControlProps = {
     // icon: IconNames.users.tenants,
@@ -74,14 +57,56 @@ const SelectTenantLoginForm: React.FC = () => {
     required: true,
   }
 
-  const handleChange = (value: string) => {
-    console.log('Selected value changed:', value);
-  };
 
-  const { options, selectedValue, onChange } = useCommonHook({
-    selectedValue: 'Default', // Initial selected value
-    onChange: handleChange, // Assuming you have a handleChange function
-  });
+//   const { options, selectedValue, onChange } = useCommonHook({
+//     selectedValue: 'Default', // Initial selected value
+//     onChange: handleChange, // Assuming you have a handleChange function
+//   });
+const [options, setOptions] = useState([
+    { value: "1", label: "1", fav: "Y" },
+    { value: "2", label: "2", fav: "N" },
+    { value: "3", label: "3", fav: "N" },
+  ]);
+  const handleFavoriteClick = () => {
+    setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+    updateOptionsel(); // Update the options array
+  };
+ 
+
+
+//   console.log("fav",isFavorite)
+
+const updateOptionsel = () => {
+    // Update the options array based on the isFavorite value
+    const updatedOptions = options.map((option) => {
+      if (option.value === selectedValue) {
+        return { ...option, fav: isFavorite ? 'Y' : 'N' };
+      } else {
+        return { ...option, fav: 'N' };
+    }
+    return option;
+
+    });
+  
+    setOptions(updatedOptions);
+  };
+// const updateOptions = (selectedValue: string) => {
+//     const updatedOptions = options.map((option) => ({
+//       ...option,
+//       fav: option.value === selectedValue && isFavorite ? 'Y' : 'N',
+//     }));
+  
+//     setOptions(updatedOptions);
+//   };
+
+  console.log('Selected options changed:', options);
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const { value } = event.target;
+  setSelectedValue && setSelectedValue(value); // Call the callback if available
+  console.log('Selected value changed:', value);
+};
+
 
   return (
     <>
@@ -90,7 +115,7 @@ const SelectTenantLoginForm: React.FC = () => {
            
             <Form action="#" className="signin-form" onSubmit={(e) => e.preventDefault()}>
               <SelectWithIconWrapper>
-                <SelectWithIcon {...withIconControlProps} options={options} ref={tenantRef} />
+                <SelectWithIcon {...withIconControlProps} options={options} ref={tenantRef} handleChange={handleChange} />
                 <FavoriteButton onClick={handleFavoriteClick}>
                   <FavoriteIcons isContour={false} color={isFavorite ? '#ffcc00' : '#4c5865'} />
                 </FavoriteButton>

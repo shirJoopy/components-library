@@ -25,9 +25,16 @@ const FavoriteIcons: React.FC<FavoriteIconsProps> = (props) => {
   const title = tooltip || "labels.Common.iconsDefTooltips.favourite";
   const iconType = color === "#ffcc00" ? 1 : 2;
 
+  const handleClick = () => {
+    // Call the provided onClick function
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return (
     <>
-      <i style={colorStyle} title={title} onClick={onClick}>
+      <i style={colorStyle} title={title} onClick={handleClick}>
         {iconType === 1 && <img src={Star} style={{ width: 20, height: 20,cursor:"pointer"  }} alt="Star" />}
         {iconType === 2 && <img src={SelectStar} style={{ width: 20, height: 20, cursor:"pointer" }} alt="Selected Star" />}
       </i>

@@ -271,6 +271,7 @@ import FavoriteIcons from '../../CommonComponent/FavoriteIcon';
 import useCommonHook from '../../CommonComponent/CommonHook';
 import Header from './Header'; // Import Header component
 import Footer from './Footer'; // Import Footer component
+import SelectTenantLoginForm from './SelectTenantLoginForm';
 
 const Wrapper = styled.div`
   display: flex;
@@ -402,13 +403,13 @@ const SelectTenantScreen: React.FC = () => {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Wrapper>
         <JoopyLPContent>
         <JoopyLP>
           <JoopyLPForm>
             <JoopyLPHeader className="row justify-content-center fs20">Select Tenant Login</JoopyLPHeader>
-            <Form action="#" className="signin-form" onSubmit={(e) => e.preventDefault()}>
+            {/* <Form action="#" className="signin-form" onSubmit={(e) => e.preventDefault()}>
               <SelectWithIconWrapper>
                 <SelectWithIcon {...withIconControlProps} options={options} ref={tenantRef} />
                 <FavoriteButton onClick={handleFavoriteClick}>
@@ -418,12 +419,13 @@ const SelectTenantScreen: React.FC = () => {
               <ButtonWrapper>
                 <Button>Continue With Tenant</Button>
               </ButtonWrapper>
-            </Form>
+            </Form> */}
+            <SelectTenantLoginForm/>
           </JoopyLPForm>
         </JoopyLP>
         </JoopyLPContent>
       </Wrapper>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
