@@ -2,6 +2,7 @@
 # Dependency directories
 /node_modules
 /dist
+/docs
 /.pnp
 /.pnp.js
 
