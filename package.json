@@ -1,6 +1,6 @@
 {
   "name": "joopy-library",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "homepage": "http://shirJoopy.github.io/components-library",
   "main": "dist/index.js",
   "dependencies": {
@@ -17,9 +17,7 @@
     "@types/react-dom": "^17.0.1",
     "@types/styled-components": "^5.1.32",
     "antd": "^5.12.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "5.0.1",
+    
     "styled-components": "^6.1.1",
     "typescript": "^5.0.4",
     "web-vitals": "^2.1.4"
@@ -67,6 +65,9 @@
     "eslint-plugin-storybook": "^0.6.15",
     "gh-pages": "^6.1.0",
     "prop-types": "^15.8.1",
-    "storybook": "^7.6.3"
+    "storybook": "^7.6.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "5.0.1"
   }
 }
