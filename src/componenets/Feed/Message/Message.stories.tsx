@@ -34,10 +34,18 @@ export const Primary: Story = {
       Icon:MessgeIcons.AlertSvg ,
       index:0,
       author:{
-        userId:123,
-        userName:'Jonnie',
-        userRole:'SuperUser',
-        avatarUrl:'https://www.svgrepo.com/show/382100/female-avatar-girl-face-woman-user-7.svg'
+        id:123,
+        username:'Jonnie',
+        role:'SuperUser',
+        channel_id: 1,
+        departmentId: 34,
+        dataVisible: true,
+        salaryVisible: true,
+        chartId: 0,
+        mgrReadOnly: false,
+        roleId: 3,
+        canSeeOtherEmployees: true
+    
       } 
 
 

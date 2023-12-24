@@ -1,7 +1,36 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Wall from './Wall';
+import Wall, { DBUserType, TopicType, UserType } from './Wall';
 import { MessgeIcons } from '../../Icons';
+import { DBMessageType, MessageType } from '../Message/Message';
+import { TabStrip } from '@progress/kendo-react-layout';
+import { ReactNode } from 'react';
+
+
+
+
+
+
+export const parseUser: (user: DBUserType) => (UserType & { DB: DBUserType }) = (props) => ({
+    DB: props,
+    id: props.USER_ID,
+    username: props.USERNAME,
+    channel_id: props.CHANNEL_ID,
+    canSeeOtherEmployees: props.CAN_SEE_OTHER_EMPLOYEES === 'Y',
+    role: props.USER_ROLE,
+    roleId: props.PERMISSION_ROLE_ID,
+    departmentId: props.DEP_ID,
+    mgrReadOnly: props.MGR_READ_ONLY === "Y",
+    chartId: props.CHART_ID,
+    salaryVisible: props.SALARY_VISIBLE === 'Y',
+    dataVisible: props.DATA_VISIBLE === 'Y',
+}
+)
+
+
+export const parseUsers: (users: DBUserType[]) => (UserType & { DB: DBUserType })[] = (users) => (
+    users.map(parseUser)
+)
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -18,52 +47,15 @@ const meta = {
     },
 } satisfies Meta<typeof Wall>;
 
+
+
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-interface Author {
-    userName:string;
-    userId: number;
-    userRole:string;
-    avatarUrl: string;
-}
-
-export interface DBUser  {
-    "USERNAME": string;
-    "USER_ID": number;
-    "CHANNEL_ID": number;
-    "USER_ROLE": string;
-    "DEP_ID": number;
-    "DATA_VISIBLE": "Y" | "N";
-    "SALARY_VISIBLE": "Y" | "N";
-    "CHART_ID": number;
-    "MGR_READ_ONLY": "Y" | "N";
-    "TENANT_ID": number;
-    "PERMISSION_ROLE_ID": number;
-    "CAN_SEE_OTHER_EMPLOYEES": "Y" | "N";
-}
-
-export interface DBMessageType {
-    MESSAGE_ID: number;
-    SUBJECT: string;
-    BODY: string;
-    CREATION_DATE: string;
-    FILE_ID: number;
-    SENDER_USER_ID: number;
-    POSITION: number;
-}
-
-export interface MessageType {
-    title: string;
-    content: string;
-    date: string;
-    author: Author;
-    Icon: string;
-    type:'alert'|'message'
-}
 
 
-const DB_RESULT : {Success:boolean, data:{messages:DBMessageType[],users:DBUser[]}} = {
+
+const DB_RESULT: { Success: boolean, data: { messages: DBMessageType[], users: DBUserType[] } } = {
     Success: true,
     data: {
         messages: [
@@ -128,23 +120,14 @@ const DB_RESULT : {Success:boolean, data:{messages:DBMessageType[],users:DBUser[
     }
 };
 
-const parseUser :(user:DBUser)=>Author = (user) =>{
-    return {
-        userId:user.USER_ID,
-        userName:user.USERNAME,
-        userRole:user.USER_ROLE,
-        avatarUrl:''
-    } 
-}
-
-const userMap = DB_RESULT.data.users.reduce((acc,user)=>({...acc,[user.USER_ID]:parseUser(user)}),{} as {[id:number]:Author});
+const userMap = DB_RESULT.data.users.reduce((acc, user) => ({ ...acc, [user.USER_ID]: parseUser(user) }), {} as { [id: number]: UserType });
 
 
 
 const parseMessage: (message: DBMessageType) => MessageType = (message: DBMessageType) => {
 
     return {
-        type:'alert',
+        type: 'alert',
         title: message.SUBJECT,
         content: message.BODY,
         date: message.CREATION_DATE,
@@ -155,9 +138,19 @@ const parseMessage: (message: DBMessageType) => MessageType = (message: DBMessag
 
 export const Primary: Story = {
     args: {
-        messages: DB_RESULT.data.messages.map(parseMessage)
-
-
+        feed: [{
+            messages: DB_RESULT.data.messages.map(parseMessage),
+            users: Object.values(userMap),
+            pkId: 0,
+            id: 0,
+            title: 'test'
+        },{
+            messages: DB_RESULT.data.messages.map(parseMessage),
+            users: Object.values(userMap),
+            pkId: 0,
+            id: 0,
+            title: 'test1'
+        }]
     },
 };
 

@@ -3,6 +3,7 @@ import { Card, Avatar } from '@progress/kendo-react-layout';
 import { Icon as KendoIcon } from '@progress/kendo-react-common';
 import styled, { css } from 'styled-components';
 import { MessgeIcons } from '../../Icons';
+import { UserType } from '../Wall/Wall';
 
 interface CustomWindow extends Window {
     _userLanguage?: string;
@@ -10,12 +11,6 @@ interface CustomWindow extends Window {
 declare let window: CustomWindow;
 
 
-interface Author {
-    userName:string;
-    userId: number;
-    userRole:string;
-    avatarUrl: string;
-}
 export interface DBMessageType {
     MESSAGE_ID: number;
     SUBJECT: string;
@@ -31,7 +26,7 @@ export interface MessageType {
     title: string;
     content: string;
     date: string;
-    author: Author;
+    author: UserType;
     Icon: string;
 }
 type Direction = 'rtl' | 'ltr';
@@ -125,17 +120,17 @@ const StyledMessageContent = styled.div<MessageType>`
 
 const Message: React.FC<MessageType & { index?: number }> = (message) => {
     const { title, content, date, author, type } = message; // Default to LTR if direction is not specified
-    const dir = 'ltr';
+    
     return (
         <Card style={{ width: '100%', marginBottom: '15px' }}>
             <StyledMessage {...message} >
                 <StyledMessageHeader {...message} >
-                    <Avatar type="image" className='avatar' style={{ margin: 0 }}>
-                        <img src={author.avatarUrl} alt={author.userName} />
+                    <Avatar type="image" className='avatar' style={{ margin: 0 }} >
+                        {/* <img src={author.avatarUrl} alt={author.userName} /> */}
                     </Avatar>
                     <Spacer />
                     <div className="props">
-                        <span className='author'>{author.userName} - {author.userRole}</span>
+                        <span className='author'>{author.username} - {author.role}</span>
                         <span className="title">{title}</span>
                     </div>
                     <img className='icon' src={Icons[type]} />
