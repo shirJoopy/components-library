@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, Avatar } from '@progress/kendo-react-layout';
-import { Icon as KendoIcon } from '@progress/kendo-react-common';
 import styled, { css } from 'styled-components';
 import { MessgeIcons } from '../../Icons';
 import { UserType } from '../Wall/Wall';
@@ -136,7 +135,7 @@ const Message: React.FC<MessageType & { index?: number }> = (message) => {
                     <img className='icon' src={Icons[type]} />
                 </StyledMessageHeader>
                 <StyledMessageContent {...message} >
-                    <p style={{ padding: 0, flex: 1 }}><div dangerouslySetInnerHTML={{ __html: decodeHtmlEntities(content) }} /><KendoIcon size='large' name="home" style={{ color: 'red', fill: 'blue' }} /></p>
+                    <p style={{ padding: 0, flex: 1 }}><div dangerouslySetInnerHTML={{ __html: decodeHtmlEntities(content) }} /></p>
                 </StyledMessageContent>
                 <p style={{ margin: 0, padding: 0 }}>Date: {date}</p>
             </StyledMessage>
