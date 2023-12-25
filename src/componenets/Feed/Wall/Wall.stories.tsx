@@ -5,32 +5,14 @@ import { MessgeIcons } from '../../Icons';
 import { DBMessageType, MessageType } from '../Message/Message';
 import { TabStrip } from '@progress/kendo-react-layout';
 import { ReactNode } from 'react';
+import { parseUser } from '../../../utils/userUtils';
 
 
 
 
 
 
-export const parseUser: (user: DBUserType) => (UserType & { DB: DBUserType }) = (props) => ({
-    DB: props,
-    id: props.USER_ID,
-    username: props.USERNAME,
-    channel_id: props.CHANNEL_ID,
-    canSeeOtherEmployees: props.CAN_SEE_OTHER_EMPLOYEES === 'Y',
-    role: props.USER_ROLE,
-    roleId: props.PERMISSION_ROLE_ID,
-    departmentId: props.DEP_ID,
-    mgrReadOnly: props.MGR_READ_ONLY === "Y",
-    chartId: props.CHART_ID,
-    salaryVisible: props.SALARY_VISIBLE === 'Y',
-    dataVisible: props.DATA_VISIBLE === 'Y',
-}
-)
 
-
-export const parseUsers: (users: DBUserType[]) => (UserType & { DB: DBUserType })[] = (users) => (
-    users.map(parseUser)
-)
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -144,7 +126,7 @@ export const Primary: Story = {
             pkId: 0,
             id: 0,
             title: 'test'
-        },{
+        }, {
             messages: DB_RESULT.data.messages.map(parseMessage),
             users: Object.values(userMap),
             pkId: 0,
