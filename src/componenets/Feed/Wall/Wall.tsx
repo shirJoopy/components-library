@@ -23,7 +23,7 @@ export type TopicType = {
 
 
 
-export type DBUserType = {
+export type DBUserType = {  
     "USERNAME": string;
     "USER_ID": number;
     "CHANNEL_ID": number;
