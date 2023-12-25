@@ -1,6 +1,6 @@
 {
   "name": "joopy-library",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "homepage": "http://shirJoopy.github.io/components-library",
   "main": "dist/index.js",
   "dependencies": {
