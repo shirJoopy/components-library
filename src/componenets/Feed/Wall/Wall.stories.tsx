@@ -1,10 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Wall, { DBUserType, TopicType, UserType } from './Wall';
-import { MessgeIcons } from '../../Icons';
+import Wall, { DBUserType, UserType } from './Wall';
 import { DBMessageType, MessageType } from '../Message/Message';
-import { TabStrip } from '@progress/kendo-react-layout';
-import { ReactNode } from 'react';
+
 import { parseUser } from '../../../utils/userUtils';
 
 
