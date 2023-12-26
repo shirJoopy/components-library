@@ -10,6 +10,8 @@ interface FavoriteIconsProps {
   tooltip?: string;
   isContour?: boolean;
   onClick?: () => void;
+  favorite?: boolean;
+
 }
 
 const ICON_SIZES_CLASSES = {
@@ -19,11 +21,11 @@ const ICON_SIZES_CLASSES = {
 };
 
 const FavoriteIcons: React.FC<FavoriteIconsProps> = (props) => {
-  const { size, color, tooltip, onClick } = props;
+  const { size, color, tooltip, onClick,favorite } = props;
   const styleSizeClass = size || ICON_SIZES_CLASSES.MEDIUM;
   const colorStyle = color ? { color: color } : { color: '#4c5865' ,cursor:"pointer"};
   const title = tooltip || "labels.Common.iconsDefTooltips.favourite";
-  const iconType = color === "#ffcc00" ? 1 : 2;
+  const iconType = favorite ? 2 : 1;
 
   const handleClick = () => {
     // Call the provided onClick function
