@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card, Avatar } from '@progress/kendo-react-layout';
-import { Icon as KendoIcon } from '@progress/kendo-react-common';
-import { Avatar as AvatarIcon } from 'antd';
 import styled, { css } from 'styled-components';
+import { MessgeIcons } from '../../Icons';
+import { UserType } from '../Wall/Wall';
 
 interface CustomWindow extends Window {
     _userLanguage?: string;
@@ -10,29 +10,31 @@ interface CustomWindow extends Window {
 declare let window: CustomWindow;
 
 
-interface Author {
-    userId: number;
-    avatarUrl: string;
-    altText: string;
-}
 export interface DBMessageType {
     MESSAGE_ID: number;
     SUBJECT: string;
     BODY: string;
-    CREATION_DATE: Date;
+    CREATION_DATE: string;
     FILE_ID: number;
     SENDER_USER_ID: number;
     POSITION: number;
 }
 
 export interface MessageType {
+    type:'alert'|'message';
     title: string;
     content: string;
-    date: Date;
-    author: Author;
+    date: string;
+    author: UserType;
     Icon: string;
 }
 type Direction = 'rtl' | 'ltr';
+
+function decodeHtmlEntities(html:string) {
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = html;
+    return textarea.value;
+  }
 
 const StyledMessage = styled.div<MessageType & { index?: number }>`
     display:flex;
@@ -96,6 +98,11 @@ const StyledMessageHeader = styled.div<MessageType>`
     }
 `;
 
+const Icons = {
+    alert:MessgeIcons.AlertSvg,
+    message:MessgeIcons.PrivateSvg
+}
+
 const StyledMessageContent = styled.div<MessageType>`
     display: flex;
     flex-direction: column;
@@ -111,26 +118,26 @@ const StyledMessageContent = styled.div<MessageType>`
 `;
 
 const Message: React.FC<MessageType & { index?: number }> = (message) => {
-    const { title, content, date, author, Icon } = message; // Default to LTR if direction is not specified
-    const dir = 'ltr';
+    const { title, content, date, author, type } = message; // Default to LTR if direction is not specified
+    
     return (
         <Card style={{ width: '100%', marginBottom: '15px' }}>
             <StyledMessage {...message} >
                 <StyledMessageHeader {...message} >
-                    <Avatar type="image" className='avatar' style={{ margin: 0 }}>
-                        <img src={author.avatarUrl} alt={author.altText} />
+                    <Avatar type="image" className='avatar' style={{ margin: 0 }} >
+                        {/* <img src={author.avatarUrl} alt={author.userName} /> */}
                     </Avatar>
                     <Spacer />
                     <div className="props">
-                        <span className='author'>{author.userId}</span>
+                        <span className='author'>{author.username} - {author.role}</span>
                         <span className="title">{title}</span>
                     </div>
-                    <img className='icon' src={Icon} />
+                    <img className='icon' src={Icons[type]} />
                 </StyledMessageHeader>
                 <StyledMessageContent {...message} >
-                    <p style={{ padding: 0, flex: 1 }}>{content}<KendoIcon size='large' name="home" style={{ color: 'red', fill: 'blue' }} /></p>
+                    <p style={{ padding: 0, flex: 1 }}><div dangerouslySetInnerHTML={{ __html: decodeHtmlEntities(content) }} /></p>
                 </StyledMessageContent>
-                <p style={{ margin: 0, padding: 0 }}>Date: {date.toDateString()}</p>
+                <p style={{ margin: 0, padding: 0 }}>Date: {date}</p>
             </StyledMessage>
         </Card>
     );

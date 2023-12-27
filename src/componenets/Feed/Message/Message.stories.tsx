@@ -24,18 +24,29 @@ type Story = StoryObj<typeof meta>;
 
 
 
+
 export const Primary: Story = {
   args: {
       title:'test',
+      type:'alert',
       content:'another test',
-      date:new Date(),
+      date:'01/01/2023',
       Icon:MessgeIcons.AlertSvg ,
       index:0,
       author:{
-        userId:123,
-        altText:'Jonnie',
-        avatarUrl:'https://www.svgrepo.com/show/382100/female-avatar-girl-face-woman-user-7.svg'
-      }
+        id:123,
+        username:'Jonnie',
+        role:'SuperUser',
+        channel_id: 1,
+        departmentId: 34,
+        dataVisible: true,
+        salaryVisible: true,
+        chartId: 0,
+        mgrReadOnly: false,
+        roleId: 3,
+        canSeeOtherEmployees: true
+    
+      } 
 
 
 
